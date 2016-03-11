@@ -1,0 +1,71 @@
+<div class="eqLogic-widget eqLogic" style="min-height : 180px;background-color: #background_color#;#style#" data-eqLogic_id="#id#" data-eqLogic_uid="#uid#" data-version="mobile" >
+  <span class="statusCmd pull-right" style="position : absolute;left : 2px;z-index: 1030;"></span>
+  <i class='fa fa-refresh pull-right cursor cmd refresh' data-cmd_id="#cmd_refresh_id#" style="margin-top: 3px;margin-right: 3px;"></i>
+  <i class="#docked_history# fa fa-home dock noRefresh" data-cmd_id="#docked_id#" style="position : absolute;bottom: 3px;left: 3px;color:white;"></i>
+  <i class="#scheduled_history# fa fa-clock-o schedule noRefresh" data-cmd_id="#scheduled_id#" style="position : absolute;bottom: 3px;left: 20px;color:white;"></i>
+  <i class="#charging_history# fa fa-plug charging noRefresh" data-cmd_id="#charging_id#" style="position : absolute;bottom: 3px;left: 37px;color:white;"></i>
+  <span class="battery" style="position : absolute;bottom: 0px;right: 3px;color:white;"></span>
+  <center class="widget-name">#name#</center>
+  
+<div class="row">
+            <div class="col-xs-12">
+                <center>
+                    <span class="alertinfo" style="color:white;font-size : 13px;font-weight: bold;Cursor:default">#etat#</span><br/>
+					<span class="etat" data-cmd_id="#etat_id#" style="cursor : default;font-size : 40px"></span><br/>
+				
+				<a class="ui-btn ui-mini ui-btn-inline ui-btn-b cmd turbo" data-cmd_id="#cmd_start_id#"><i class="fa fa-rocket"></i></a>
+				<a class="ui-btn ui-mini ui-btn-inline ui-btn-b cmd eco" data-cmd_id="#cmd_starteco_id#"><i class="fa fa-recycle"></i></a>
+				<a class="ui-btn ui-mini ui-btn-inline ui-btn-b cmd pause" data-cmd_id="#cmd_pause_id#"><i class="fa fa-pause"></i></a>
+				<a class="ui-btn ui-mini ui-btn-inline ui-btn-b cmd resume" data-cmd_id="#cmd_resume_id#"><i class="fa fa-play"></i></a>
+				<a class="ui-btn ui-mini ui-btn-inline ui-btn-b cmd stop" data-cmd_id="#cmd_stop_id#"><i class="fa fa-stop"></i></a>
+				<a class="ui-btn ui-mini ui-btn-inline ui-btn-b cmd base" data-cmd_id="#cmd_base_id#"><i class="fa fa-home"></i></a>
+				</center>
+                
+				</div>
+				</div>
+
+ <script>
+  if ('#docked#' == '0') {
+        $('.eqLogic[data-eqLogic_uid=#uid#] .dock').css('color', '#a6a6a6');
+        $('.eqLogic[data-eqLogic_uid=#uid#] .dock').attr("title","Pas sur le dock");
+  }
+  if ('#scheduled#' == '0') {
+        $('.eqLogic[data-eqLogic_uid=#uid#] .schedule').css('color', '#a6a6a6');
+        $('.eqLogic[data-eqLogic_uid=#uid#] .schedule').attr("title","Aucune programmation");
+  }
+  if ('#charging#' == '0') {
+        $('.eqLogic[data-eqLogic_uid=#uid#] .charging').css('color', '#a6a6a6');
+        $('.eqLogic[data-eqLogic_uid=#uid#] .charging').attr("title","Pas en charge");
+  }
+  if ('#battery_level#' <= 15) {
+        $('.eqLogic[data-eqLogic_uid=#uid#] .battery').append('<i class="fa fa-battery-empty"></i>');
+        $('.eqLogic[data-eqLogic_uid=#uid#] .battery').css('color', 'red');
+  } else if ('#battery_level#' <= 45) {
+        $('.eqLogic[data-eqLogic_uid=#uid#] .battery').append('<i class="fa fa-battery-quarter"></i>');
+        $('.eqLogic[data-eqLogic_uid=#uid#] .battery').css('color', 'orange');
+  } else if ('#battery_level#' <= 60) {
+        $('.eqLogic[data-eqLogic_uid=#uid#] .battery').append('<i class="fa fa-battery-half"></i>');
+  } else if ('#battery_level#' <= 85) {
+        $('.eqLogic[data-eqLogic_uid=#uid#] .battery').append('<i class="fa fa-battery-three-quarters"></i>');
+  } else {
+        $('.eqLogic[data-eqLogic_uid=#uid#] .battery').append('<i class="fa fa-battery-full"></i>');
+  }
+  
+  if ('#etattech#' == '2') {
+        $('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<i class="icon maison-vacuum6"></i>');
+        $('.eqLogic[data-eqLogic_uid=#uid#] .alertinfo').css('color', '#00cd00');
+  } else if ('#etattech#' == '3'){
+        $('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<i class="fa fa-pause"></i>');
+  } else {
+        $('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<i class="fa fa-home"></i>');
+  }
+  if ('#alert#' != 'Aucune alerte') {
+       $('.eqLogic[data-eqLogic_uid=#uid#] .alertinfo').empty().append('#alert#');
+       $('.eqLogic[data-eqLogic_uid=#uid#] .alertinfo').css('color', 'red');
+	   $('.eqLogic[data-eqLogic_uid=#uid#] .etat').empty().append('<i class="fa fa-exclamation-triangle"></i>');
+  }
+  $('.eqLogic[data-eqLogic_uid=#uid#] .cmd').on('click', function() {
+			jeedom.cmd.execute({id: $(this).data('cmd_id')});
+	});
+</script>
+</div>

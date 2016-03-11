@@ -1,0 +1,134 @@
+<div class="eqLogic-widget eqLogic" style="width: 260px;background-color: #background_color#;#style#" data-eqLogic_id="#id#" data-eqLogic_uid="#uid#" data-version="dashboard" >
+<style  type="text/css">
+#cupsSlider .slider-selection {
+	background: #a6d2ff;
+}
+#forceSlider .slider-selection {
+	background: #a6d2ff;
+}
+#minutesSlider .slider-selection {
+	background: #a6d2ff;
+}
+</style>
+<span class="statusCmd pull-right" style="position : absolute;left : 2px;z-index: 1030;"></span>
+<center><a href="#eqLink#" style="font-size : 1.2em;"> #name# </a></center>
+<span class="cmd cmd-widget" data-cmd_id="#cmd_plateheat_id#" style="display:none;"></span>
+<span class="cmd cmd-widget" data-cmd_id="#cmd_brewcustom_id#" style="display:none;"></span>
+<i class="#carafinfo_history# fa fa-beer caraf tooltips noRefresh" data-cmd_id="#carafinfo_id#" title="Carafe en place" style="position : absolute;bottom: 3px;right: 20px;color:white;"></i>
+<i class="#plateauinfo_history# fa fa-fire plateauinfo tooltips noRefresh" data-cmd_id="#plateauinfo_id#" title="Plateau en chauffe" style="position : absolute;bottom: 3px;right: 3px;color:white;"></i>
+<span style="position : absolute;bottom: 3px;left: 3px;"><input class="mode" type="checkbox" data-size="mini" data-on-color='success' data-off-color='info' data-on-text='<i class="fa fa-gears" title="Grains (passer à filtre)">' data-off-text='<i class="fa fa-filter" title="Filtre (passer à grains)">' checked></span>
+<div class="row">
+	<div class="col-sm-6">
+		<center>
+			<span class="alertinfo" style="color:white;font-size : 13px;font-weight: bold;Cursor:default">Prête à faire un café</span><br/>
+			<span class="etat tooltips" data-cmd_id="#status_id#" title="Statut : #status#" style="cursor : default;font-size : 40px"></span><br/>
+			<div class="progress" style="height:8px; margin-top: 5px;width : 70%">
+				<div class="progress-bar progress-bar-info waterlevel tooltips" data-cmd_id="#water_id#" title="Niveau d'eau approximatif" style="width: 50%;"></div>
+			</div>
+		</center>
+	</div>
+	<div class="col-sm-6">
+		<center>
+		<span class="spancups" style="font-size : 1em; font-weight: bold;margin-right:5px;cursor:default">#cupsinfo# <i class="fa fa-coffee" title="Tasses"></i></span>
+		<span class="spanforce" style="font-size : 1em; font-weight: bold;margin-right:5px;cursor:default">#forceinfo# <i class="fa fa-tint" title="Intensité"></i></span>
+		<span class="spanminutes" style="font-size : 1em; font-weight: bold;cursor:default">#minutesinfo# <i class="fa fa-clock-o" title="Durée de chauffe plateau"></i></span>
+		</center>
+		<div class="row">
+			<div class="col-sm-1">
+				<i class="fa fa-coffee" title="Tasses" style="font-size : 0.9em;cursor:default"></i>
+				<i class="fa fa-tint" title="Intensité" style="font-size : 0.9em;cursor:default"></i>
+				<i class="fa fa-clock-o" title="Durée de chauffe plateau" style="font-size : 0.9em;cursor:default"></i>
+			</div>
+			<div class="col-sm-5">
+				<div class="cups" style="width: 200%;" data-slider-tooltip="hide" data-slider-id="cupsSlider"></div>
+				<div class="force" style="width: 200%;" data-slider-tooltip="hide" data-slider-id="forceSlider"></div>
+				<div class="minutes" style="width: 200%;" data-slider-tooltip="hide" data-slider-id="minutesSlider"></div>
+			</div>
+		</div>
+		<center>
+			<a class="btn btn-sm btn-default brewcustom tooltips" title="Faire couler un café" style="background-color:#6FB76F !important;border-color : transparent !important;"><i class="fa fa-coffee"></i></a>
+			<a class="btn btn-sm btn-default plateheat tooltips" title="Faire chauffer le plateau" style="background-color:#FFB732 !important;border-color : transparent !important;"><i class="fa fa-fire"></i></a>
+		</center>
+	</div>
+</div>
+
+ <script>
+if ('#carafinfo#' == '0') {
+	$('.eqLogic[data-eqLogic_uid=#uid#] .caraf').css('color', '#a6a6a6');
+	$('.eqLogic[data-eqLogic_uid=#uid#] .caraf').attr("title","Carafe pas en place");
+}
+if ('#plateauinfo#' == '0') {
+	$('.eqLogic[data-eqLogic_uid=#uid#] .plateauinfo').css('color', '#a6a6a6');
+	$('.eqLogic[data-eqLogic_uid=#uid#] .plateauinfo').attr("title","Plateau éteint");
+}
+$('.eqLogic[data-eqLogic_uid=#uid#] .mode').bootstrapSwitch();
+$(".eqLogic[data-eqLogic_uid=#uid#] .cups").bootstrapSlider({
+	min: 1,
+	max: 12,
+	value: ('#cupsinfo#' == '') ? 1 : parseInt('#cupsinfo#')
+});
+$(".eqLogic[data-eqLogic_uid=#uid#] .slider.slider-horizontal").css('z-index',1);
+$(".eqLogic[data-eqLogic_uid=#uid#] .cups").on('slideStop', function (ev) {
+	jeedom.cmd.execute({id: '#cmd_changecup_id#', value: {slider: ev.value}});
+	$(".eqLogic[data-eqLogic_uid=#uid#] .spancups").empty().append(ev.value + ' <i class="fa fa-coffee" title="Tasses"></i>');
+});
+$(".eqLogic[data-eqLogic_uid=#uid#] .force").bootstrapSlider({
+	min: 1,
+	max: 3,
+	value: ('#forceinfo#' == '') ? 1 : parseInt('#forceinfo#')
+});
+$(".eqLogic[data-eqLogic_uid=#uid#] .slider.slider-horizontal").css('z-index',1);
+$(".eqLogic[data-eqLogic_uid=#uid#] .force").on('slideStop', function (ev) {
+	jeedom.cmd.execute({id: '#cmd_changeforce_id#', value: {slider: ev.value}});
+	$(".eqLogic[data-eqLogic_uid=#uid#] .spanforce").empty().append(ev.value + '  <i class="fa fa-tint" title="Intensité"></i>');
+});
+$(".eqLogic[data-eqLogic_uid=#uid#] .minutes").bootstrapSlider({
+	min: 5,
+	max: 30,
+	value: ('#minutesinfo#' == '') ? 5 : parseInt('#minutesinfo#')
+});
+$(".eqLogic[data-eqLogic_uid=#uid#] .slider.slider-horizontal").css('z-index',1);
+$(".eqLogic[data-eqLogic_uid=#uid#] .minutes").on('slideStop', function (ev) {
+	$(".eqLogic[data-eqLogic_uid=#uid#] .spanminutes").empty().append(ev.value + ' <i class="fa fa-clock-o" title="Intensité">');
+	jeedom.cmd.execute({id: '#cmd_changeminutes_id#', value: {slider: ev.value}});
+	
+});
+if ('#status#' == 'Café en cours') {
+	$('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<i class="fa fa-tint"></i>');
+	$('.eqLogic[data-eqLogic_uid=#uid#] .alertinfo').css('color', '#00cd00');
+} else if ('plateau'.indexOf('#status#') !=-1){
+	$('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<i class="fa fa-coffee"></i>');
+	$('.eqLogic[data-eqLogic_uid=#uid#] .alertinfo').css('color', 'white');
+} else if ('carafe'.indexOf('#status#') !=-1){
+	$('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<i class="fa fa-beer"></i>');
+	$('.eqLogic[data-eqLogic_uid=#uid#] .alertinfo').css('color', 'red');
+  } else if ('terminé'.indexOf('#status#') !=-1){
+	$('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<i class="fa fa-check"></i>');
+	$('.eqLogic[data-eqLogic_uid=#uid#] .alertinfo').css('color', '#00cd00');
+} else {
+	$('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<i class="fa fa-coffee"></i>');
+}
+if ('#modeinfo#' == 'grains') {
+	$('.eqLogic[data-eqLogic_uid=#uid#] .mode').bootstrapSwitch('state', true, true);
+} else {
+	$('.eqLogic[data-eqLogic_uid=#uid#] .mode').bootstrapSwitch('state', false, false);
+}
+$('.eqLogic[data-eqLogic_uid=#uid#] .plateheat').on('click', function() {
+	jeedom.cmd.execute({id: '#cmd_plateheat_id#', value: {slider: $(".eqLogic[data-eqLogic_uid=#uid#] .minutes").slider().val()}});
+});
+$('.eqLogic[data-eqLogic_uid=#uid#] .brewcustom').on('click', function() {
+	jeedom.cmd.execute({id: '#cmd_brewcustom_id#', value: {'message': 'WIDGET'}});
+});
+$('.eqLogic[data-eqLogic_uid=#uid#] .cmd').on('click', function() {
+	jeedom.cmd.execute({id: $(this).data('cmd_id')});
+});
+$('.eqLogic[data-eqLogic_uid=#uid#] .mode').on('switchChange.bootstrapSwitch', function(event, state) {
+	if (state == true) {
+		jeedom.cmd.execute({id: '#cmd_changemode_id#', value: 1});
+	} else {
+		jeedom.cmd.execute({id: '#cmd_changemode_id#', value: 0});
+}
+});
+$('.eqLogic[data-eqLogic_uid=#uid#] .water').css('width', (parseFloat('#water#') / parseFloat('12') * 100) + '%');
+</script>
+</div>
