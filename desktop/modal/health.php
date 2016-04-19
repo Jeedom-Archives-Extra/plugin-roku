@@ -18,10 +18,10 @@
 if (!isConnect('admin')) {
 	throw new Exception('401 Unauthorized');
 }
-$eqLogics = smartercoffee::byType('smartercoffee');
+$eqLogics = roku::byType('roku');
 ?>
 
-<table class="table table-condensed tablesorter" id="table_healthsmartercoffee">
+<table class="table table-condensed tablesorter" id="table_healthroku">
 	<thead>
 		<tr>
 			<th>{{Module}}</th>

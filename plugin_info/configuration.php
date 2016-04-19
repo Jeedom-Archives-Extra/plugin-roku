@@ -25,7 +25,7 @@ if (!isConnect()) {
 ?>
 <form class="form-horizontal">
 <fieldset>
-
+<span class="col-lg-12" style="font-size:1em;color:grey" >{{Si la détection automatique ne marche pas vous pouvez toujours rajouter le roku avec son adresse IP. Il peut falloir lancer la détection 2 ou 3 fois.}}</span></br></br>
 <label class="col-lg-2 control-label">{{Détecter vos Rokus}}</label>
 <div class="col-lg-2">
 	<a class="btn btn-warning" id="bt_scan"><i class="fa fa-check"></i> {{Scanner automatiquement}}</a>

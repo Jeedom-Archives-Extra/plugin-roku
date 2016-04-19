@@ -15,6 +15,11 @@
  * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
  */
 
+$('#bt_healthroku').on('click', function () {
+    $('#md_modal').dialog({title: "{{Santé Roku}}"});
+    $('#md_modal').load('index.php?v=d&plugin=roku&modal=health').dialog('open');
+});
+
 $('#bt_syncchannel').on('click', function () {
 		bootbox.confirm('{{Voulez-vous lancer une synchronistation de vos chaînes }}', function (result) {
 			if (result) {
@@ -35,7 +40,7 @@ $('#bt_syncchannel').on('click', function () {
             	return;
             }
             $('#div_alert').showAlert({message: '{{Synchronisation réussie}}', level: 'success'});
-			$('#ul_plugin .li_plugin[data-plugin_id=roku').click();
+			location.reload();
         }
     });
     }
@@ -50,18 +55,13 @@ function addCmdToTable(_cmd) {
     tr += '<td>';
     tr += '<input class="cmdAttr form-control input-sm" data-l1key="id" style="display : none;">';
     tr += '<input class="cmdAttr form-control input-sm" data-l1key="name"></td>';
-     tr += '<td>';
-    tr += '<span><input type="checkbox" data-size="mini" data-label-text="{{Historiser}}" class="cmdAttr bootstrapSwitch" data-l1key="isHistorized" /></span> ';
-    tr += '</td>';
     tr += '<td>';
-    tr += '<input class="cmdAttr form-control input-sm" data-l1key="type" style="display : none;">';
-    tr += '<input class="cmdAttr form-control input-sm" data-l1key="subType" style="display : none;">';
+	tr += '<i class="fa fa-minus-circle pull-right cmdAction cursor" data-action="remove"></i>';
     if (is_numeric(_cmd.id)) {
-        tr += '<a class="btn btn-default btn-xs cmdAction expertModeVisible" data-action="configure"><i class="fa fa-cogs"></i></a> ';
-        tr += '<a class="btn btn-default btn-xs cmdAction" data-action="test"><i class="fa fa-rss"></i> {{Tester}}</a>';
+        tr += '<a class="btn btn-default btn-xs pull-right cmdAction" data-action="test"><i class="fa fa-rss"></i> {{Tester}}</a>';
+        tr += '<a class="btn btn-default btn-xs pull-right cmdAction expertModeVisible" data-action="configure"><i class="fa fa-cogs"></i></a> ';
     }
-    tr += '<i class="fa fa-minus-circle pull-right cmdAction cursor" data-action="remove"></i></td>';
-    tr += '</tr>';
+    tr += '</td></tr>';
     $('#table_cmd tbody').append(tr);
     $('#table_cmd tbody tr:last').setValues(_cmd, '.cmdAttr');
     jeedom.cmd.changeType($('#table_cmd tbody tr:last'), init(_cmd.subType));

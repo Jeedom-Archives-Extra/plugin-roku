@@ -1,71 +1,82 @@
-<div class="eqLogic-widget eqLogic" style="min-height : 180px;background-color: #background_color#;#style#" data-eqLogic_id="#id#" data-eqLogic_uid="#uid#" data-version="mobile" >
-  <span class="statusCmd pull-right" style="position : absolute;left : 2px;z-index: 1030;"></span>
-  <i class='fa fa-refresh pull-right cursor cmd refresh' data-cmd_id="#cmd_refresh_id#" style="margin-top: 3px;margin-right: 3px;"></i>
-  <i class="#docked_history# fa fa-home dock noRefresh" data-cmd_id="#docked_id#" style="position : absolute;bottom: 3px;left: 3px;color:white;"></i>
-  <i class="#scheduled_history# fa fa-clock-o schedule noRefresh" data-cmd_id="#scheduled_id#" style="position : absolute;bottom: 3px;left: 20px;color:white;"></i>
-  <i class="#charging_history# fa fa-plug charging noRefresh" data-cmd_id="#charging_id#" style="position : absolute;bottom: 3px;left: 37px;color:white;"></i>
-  <span class="battery" style="position : absolute;bottom: 0px;right: 3px;color:white;"></span>
-  <center class="widget-name">#name#</center>
-  
-<div class="row">
-            <div class="col-xs-12">
-                <center>
-                    <span class="alertinfo" style="color:white;font-size : 13px;font-weight: bold;Cursor:default">#etat#</span><br/>
-					<span class="etat" data-cmd_id="#etat_id#" style="cursor : default;font-size : 40px"></span><br/>
-				
-				<a class="ui-btn ui-mini ui-btn-inline ui-btn-b cmd turbo" data-cmd_id="#cmd_start_id#"><i class="fa fa-rocket"></i></a>
-				<a class="ui-btn ui-mini ui-btn-inline ui-btn-b cmd eco" data-cmd_id="#cmd_starteco_id#"><i class="fa fa-recycle"></i></a>
-				<a class="ui-btn ui-mini ui-btn-inline ui-btn-b cmd pause" data-cmd_id="#cmd_pause_id#"><i class="fa fa-pause"></i></a>
-				<a class="ui-btn ui-mini ui-btn-inline ui-btn-b cmd resume" data-cmd_id="#cmd_resume_id#"><i class="fa fa-play"></i></a>
-				<a class="ui-btn ui-mini ui-btn-inline ui-btn-b cmd stop" data-cmd_id="#cmd_stop_id#"><i class="fa fa-stop"></i></a>
-				<a class="ui-btn ui-mini ui-btn-inline ui-btn-b cmd base" data-cmd_id="#cmd_base_id#"><i class="fa fa-home"></i></a>
-				</center>
-                
-				</div>
-				</div>
-
- <script>
-  if ('#docked#' == '0') {
-        $('.eqLogic[data-eqLogic_uid=#uid#] .dock').css('color', '#a6a6a6');
-        $('.eqLogic[data-eqLogic_uid=#uid#] .dock').attr("title","Pas sur le dock");
-  }
-  if ('#scheduled#' == '0') {
-        $('.eqLogic[data-eqLogic_uid=#uid#] .schedule').css('color', '#a6a6a6');
-        $('.eqLogic[data-eqLogic_uid=#uid#] .schedule').attr("title","Aucune programmation");
-  }
-  if ('#charging#' == '0') {
-        $('.eqLogic[data-eqLogic_uid=#uid#] .charging').css('color', '#a6a6a6');
-        $('.eqLogic[data-eqLogic_uid=#uid#] .charging').attr("title","Pas en charge");
-  }
-  if ('#battery_level#' <= 15) {
-        $('.eqLogic[data-eqLogic_uid=#uid#] .battery').append('<i class="fa fa-battery-empty"></i>');
-        $('.eqLogic[data-eqLogic_uid=#uid#] .battery').css('color', 'red');
-  } else if ('#battery_level#' <= 45) {
-        $('.eqLogic[data-eqLogic_uid=#uid#] .battery').append('<i class="fa fa-battery-quarter"></i>');
-        $('.eqLogic[data-eqLogic_uid=#uid#] .battery').css('color', 'orange');
-  } else if ('#battery_level#' <= 60) {
-        $('.eqLogic[data-eqLogic_uid=#uid#] .battery').append('<i class="fa fa-battery-half"></i>');
-  } else if ('#battery_level#' <= 85) {
-        $('.eqLogic[data-eqLogic_uid=#uid#] .battery').append('<i class="fa fa-battery-three-quarters"></i>');
-  } else {
-        $('.eqLogic[data-eqLogic_uid=#uid#] .battery').append('<i class="fa fa-battery-full"></i>');
-  }
-  
-  if ('#etattech#' == '2') {
-        $('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<i class="icon maison-vacuum6"></i>');
-        $('.eqLogic[data-eqLogic_uid=#uid#] .alertinfo').css('color', '#00cd00');
-  } else if ('#etattech#' == '3'){
-        $('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<i class="fa fa-pause"></i>');
-  } else {
-        $('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<i class="fa fa-home"></i>');
-  }
-  if ('#alert#' != 'Aucune alerte') {
-       $('.eqLogic[data-eqLogic_uid=#uid#] .alertinfo').empty().append('#alert#');
-       $('.eqLogic[data-eqLogic_uid=#uid#] .alertinfo').css('color', 'red');
-	   $('.eqLogic[data-eqLogic_uid=#uid#] .etat').empty().append('<i class="fa fa-exclamation-triangle"></i>');
-  }
-  $('.eqLogic[data-eqLogic_uid=#uid#] .cmd').on('click', function() {
+<div class="eqLogic-widget eqLogic" style="width : 170px;min-height: 180px;overflow:hidden;border:#border#;border-radius:#border-radius#;background-color: #background-color#;color: #color#;#style#;" data-eqLogic_id="#id#" data-eqLogic_uid="#uid#" data-version="mobile" >
+<style  type="text/css">
+.channels{
+	height: 120px;
+	width: 180px;
+}
+</style>
+<span class="statusCmd pull-right" style="position : absolute;left : 2px;z-index: 1030;"></span>
+  <i class="fa fa-th-large cursor tooltips changechannel noRefresh" title="Page Chaines" style="position : absolute;bottom: 3px;right: 3px;z-index: 1030;color:grey"></i>
+  <i class="fa fa-search cursor tooltips changesearch noRefresh" title="Page Recherche" style="position : absolute;bottom: 3px;left: 5px;z-index: 1030;color:grey"></i>
+  <i class="fa fa-home cursor tooltips changehome noRefresh" title="Page Principal" style="position : absolute;bottom: 3px;right: 75px;z-index: 1030;color:white"></i>
+  <center style="#hideEqLogicName#">#name_display#  <span style="font-size: 0.85em;position: relative;top:-2px;">#object_name#</span></center>
+<div class="search" align = "center" style="display:none;">
+<a class="ui-btn ui-mini ui-btn-inline ui-btn-b bt_search"><i class="fa fa-search"></i> Ecran recherche</a>
+<div style="width : 150px;">
+<input type="text" class="searchbox" placeholder="Texte à rechercher" style="margin-top : 5px;"/>
+</div>
+<a class="ui-btn ui-mini ui-btn-inline ui-btn-b bt_sendtext" style ="color : green"><i class="fa fa-check"></i></a>
+<a class="ui-btn ui-mini ui-btn-inline ui-btn-b bt_delete" style ="color : orange"><i class="fa fa-arrow-left"></i> Effacer</a>
+</div>
+<div class="commands" align = "center" style="display:block;">
+<a class="ui-btn ui-mini ui-btn-inline ui-btn-b cmd back" data-cmd_id="#cmd_back_id#"><i class="fa fa-arrow-left"></i></a>
+<a class="ui-btn ui-mini ui-btn-inline ui-btn-b cmd up" data-cmd_id="#cmd_up_id#"><i class="fa fa-chevron-up" style ="color : #b47fb4"></i></a>
+<a class="ui-btn ui-mini ui-btn-inline ui-btn-b cmd home" data-cmd_id="#cmd_home_id#"><i class="fa fa-home"></i></a></br>
+<a class="ui-btn ui-mini ui-btn-inline ui-btn-b cmd left" data-cmd_id="#cmd_left_id#"><i class="fa fa-chevron-left" style ="color : #b47fb4"></i></a>
+<a class="ui-btn ui-mini ui-btn-inline ui-btn-b cmd select" data-cmd_id="#cmd_select_id#"><i class="fa fa-check" style ="color : #b47fb4"></i></a>
+<a class="ui-btn ui-mini ui-btn-inline ui-btn-b cmd right" data-cmd_id="#cmd_right_id#"><i class="fa fa-chevron-right" style ="color : #b47fb4"></i></a></br>
+<a class="ui-btn ui-mini ui-btn-inline ui-btn-b cmd replay" data-cmd_id="#cmd_replay_id#"><i class="fa fa-refresh"></i></a>
+<a class="ui-btn ui-mini ui-btn-inline ui-btn-b cmd down" data-cmd_id="#cmd_down_id#"><i class="fa fa-chevron-down" style ="color : #b47fb4"></i></a>
+<a class="ui-btn ui-mini ui-btn-inline ui-btn-b cmd info" data-cmd_id="#cmd_info_id#"><i class="fa fa-asterisk"></i></a></br>
+<a class="ui-btn ui-mini ui-btn-inline ui-btn-b cmd reverse" data-cmd_id="#cmd_reverse_id#"><i class="fa fa-backward"></i></a>
+<a class="ui-btn ui-mini ui-btn-inline ui-btn-b cmd play" data-cmd_id="#cmd_play_id#"><i class="fa fa-play"></i></a>
+<a class="ui-btn ui-mini ui-btn-inline ui-btn-b cmd pause" data-cmd_id="#cmd_play_id#"><i class="fa fa-pause"></i></a>
+<a class="ui-btn ui-mini ui-btn-inline ui-btn-b cmd forward" data-cmd_id="#cmd_forward_id#"><i class="fa fa-forward"></i></a>
+</div>
+<div class="channels" align = "center" style="overflow : scroll;display:none;">
+<div>
+#channels#
+</div>
+</div>
+<script>
+$('.eqLogic[data-eqLogic_uid=#uid#] .changechannel').on('click', function () {
+		$('.eqLogic[data-eqLogic_uid=#uid#] .commands').hide();
+		$('.eqLogic[data-eqLogic_uid=#uid#] .channels').show();
+		$('.eqLogic[data-eqLogic_uid=#uid#] .search').hide();
+		$('.eqLogic[data-eqLogic_uid=#uid#] .changehome').css('color', 'grey');
+		$('.eqLogic[data-eqLogic_uid=#uid#] .changechannel').css('color', 'white');
+		$('.eqLogic[data-eqLogic_uid=#uid#] .changesearch').css('color', 'grey');
+	});
+$('.eqLogic[data-eqLogic_uid=#uid#] .changesearch').on('click', function () {
+		$('.eqLogic[data-eqLogic_uid=#uid#] .commands').hide();
+		$('.eqLogic[data-eqLogic_uid=#uid#] .channels').hide();
+		$('.eqLogic[data-eqLogic_uid=#uid#] .search').show();
+		$('.eqLogic[data-eqLogic_uid=#uid#] .changehome').css('color', 'grey');
+		$('.eqLogic[data-eqLogic_uid=#uid#] .changechannel').css('color', 'grey');
+		$('.eqLogic[data-eqLogic_uid=#uid#] .changesearch').css('color', 'white');
+	});
+$('.eqLogic[data-eqLogic_uid=#uid#] .changehome').on('click', function () {
+		$('.eqLogic[data-eqLogic_uid=#uid#] .commands').show();
+		$('.eqLogic[data-eqLogic_uid=#uid#] .channels').hide();
+		$('.eqLogic[data-eqLogic_uid=#uid#] .search').hide();
+		$('.eqLogic[data-eqLogic_uid=#uid#] .changehome').css('color', 'white');
+		$('.eqLogic[data-eqLogic_uid=#uid#] .changechannel').css('color', 'grey');
+		$('.eqLogic[data-eqLogic_uid=#uid#] .changesearch').css('color', 'grey');
+	});
+$('.eqLogic[data-eqLogic_uid=#uid#] .cmd').on('click', function() {
 			jeedom.cmd.execute({id: $(this).data('cmd_id')});
+	});
+$('.eqLogic[data-eqLogic_uid=#uid#] .bt_sendtext').on('click', function() {
+console.log('toto');
+	jeedom.cmd.execute({id: '#cmd_literal_id#', value: {'message': $('.eqLogic[data-eqLogic_uid=#uid#] .searchbox').value()}});
+	});
+$('.eqLogic[data-eqLogic_uid=#uid#] .bt_delete').on('click', function() {
+console.log('toto');
+	jeedom.cmd.execute({id: '#cmd_backspace_id#'});
+	});
+$('.eqLogic[data-eqLogic_uid=#uid#] .bt_search').on('click', function() {
+console.log('toto');
+	jeedom.cmd.execute({id: '#cmd_search_id#'});
 	});
 </script>
 </div>

@@ -21,6 +21,7 @@ require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
 
 class roku extends eqLogic {
 	/***************************Attributs*******************************/
+	public static $_widgetPossibility = array('custom' => true);
 	
 	public static function scanroku() {
 		log::remove('roku_update');
@@ -45,7 +46,6 @@ class roku extends eqLogic {
 				$eqLogic->save();
 			}
 		}
-		log::add('roku','debug','Sortie console : ' .$config);
 		$number=count(eqLogic::byType('roku'));
 		config::save('numberroku', $number, 'roku');
 	}
@@ -82,6 +82,11 @@ class roku extends eqLogic {
 				$cmd->remove();
 			}
 		}
+	}
+	
+	public function postRemove () {
+		$number=count(eqLogic::byType('roku'));
+		config::save('numberroku', $number, 'roku');
 	}
 	
 	public function preSave() {
@@ -129,7 +134,7 @@ class roku extends eqLogic {
 			$enter = new rokucmd();
 			$enter->setLogicalId('enter');
 			$enter->setIsVisible(1);
-			$enter->setName(__('Ok', __FILE__));
+			$enter->setName(__('Enter', __FILE__));
 		}
 		$enter->setType('action');
 		$enter->setSubType('other');
@@ -249,7 +254,7 @@ class roku extends eqLogic {
 			$select = new rokucmd();
 			$select->setLogicalId('select');
 			$select->setIsVisible(1);
-			$select->setName(__('Select', __FILE__));
+			$select->setName(__('OK', __FILE__));
 		}
 		$select->setType('action');
 		$select->setSubType('other');
@@ -321,6 +326,47 @@ class roku extends eqLogic {
 		$number=count(eqLogic::byType('roku'));
 		config::save('numberroku', $number, 'roku');
 	}
+	
+	public function toHtml($_version = 'dashboard') {
+		$replace = $this->preToHtml($_version);
+ 		if (!is_array($replace)) {
+ 			return $replace;
+  		}
+		$version = jeedom::versionAlias($_version);
+		if ($this->getDisplay('hideOn' . $version) == 1) {
+			return '';
+		}
+		$channel = '';
+		foreach ($this->getCmd('action') as $cmd) {
+			$logical = $cmd->getLogicalId();
+			if (strpos($logical, 'channel') !== false) {
+				$channel .= '<img class="cmd noRefresh tooltips" data-cmd_id="' . $cmd->getId() . '" src="plugins/roku/tmp/' . substr($logical,7) . '.png" title="' . $cmd->getname() . '" height="50px" style = "margin-top : 5px;cursor:pointer" />';
+			} else {
+				$replace['#cmd_' . $cmd->getLogicalId() . '_id#'] = $cmd->getId();
+			}
+		}
+		$replace['#channels#'] = $channel;
+		
+		if (($_version == 'dview' || $_version == 'mview') && $this->getDisplay('doNotShowNameOnView') == 1) {
+			$replace['#name#'] = '';
+			$replace['#object_name#'] = (is_object($object)) ? $object->getName() : '';
+		}
+		if (($_version == 'mobile' || $_version == 'dashboard') && $this->getDisplay('doNotShowNameOnDashboard') == 1) {
+			$replace['#name#'] = '<br/>';
+			$replace['#object_name#'] = (is_object($object)) ? $object->getName() : '';
+		}
+		
+		$parameters = $this->getDisplay('parameters');
+		if (is_array($parameters)) {
+			foreach ($parameters as $key => $value) {
+				$replace['#' . $key . '#'] = $value;
+			}
+		}
+		
+		$html = template_replace($replace, getTemplate('core', $version, 'eqLogic', 'roku'));
+		cache::set('widgetHtml' . $version . $this->getId(), $html, 0);
+		return $html;
+    }
 }
 
 class rokuCmd extends cmd {
