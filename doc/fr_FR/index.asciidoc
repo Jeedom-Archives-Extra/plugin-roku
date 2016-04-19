@@ -1,9 +1,15 @@
-== Waze in Time
+== Roku
 
 === Description
-Ce plugin permet d'avoir les infos de trajet (traffic pris en compte) via Waze. Ce plugin peux ne plus marcher si Waze n'acceptes plus qu'on interroge son site
+Ce plugin permet de contrôller votre Roku. Il peut le détecter tout seul et synchroniser ses chaînes. Ainsi il sera possible d'avoir un widget en 3 parties :
 
-image:../images/wazeintime_screenshot1.jpg[width=256]
+1 partie télécommande
+
+1 partie recherche
+
+1 partie chaînes
+
+image:../images/roku_screenshot1.png[width=256]
 
 '''
 === Configuration
