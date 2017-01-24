@@ -1,7 +1,7 @@
 == Roku
 
 === Description
-Ce plugin permet de contrôller votre Roku. Il peut le détecter tout seul et synchroniser ses chaînes. Ainsi il sera possible d'avoir un widget en 3 parties :
+Ce plugin permet de contrôler votre Roku. Il peut le détecter tout seul et synchroniser ses chaînes. Ainsi il sera possible d'avoir un widget en 3 parties :
 
 1 partie télécommande
 
