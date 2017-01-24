@@ -4,13 +4,13 @@
 
 Afin d'utiliser le plugin, vous devez le télécharger, l'installer et l'activer comme tout plugin Jeedom.
 
-Suite à cela il vous faudra créer cliquer sur "Scanner automtiquement" :
+Suite à cela il vous faudra le créer, cliquer sur "Scanner automtiquement" :
 
 image:../images/roku_screenshot2.png[width=380]
 
-Il se peut que cela ne marche pas à tous les coups, vous pouvez retenter 2 ou 3 fois. Si malgré tout le roku n'est pas détecté, aucun soucis vous pourrez le rajouter manuellement avec son ip.
+Il se peut que cela ne fonctionne pas à chaque fois, vous pouvez retenter 2 ou 3 fois. Si malgré tout le roku n'est pas détecté, aucun souci vous pourrez le rajouter manuellement avec son adresse IP.
 
-Rendez vous dans le menu plugins/multimedia, vous y trouverez le plugin Roku :
+Rendez vous dans le menu Plugins/Multimedia, vous y trouverez le plugin Roku :
 
 image:../images/configuration1.png[width=380]
 
@@ -32,9 +32,9 @@ si vous voulez que l'équipement soit actif ou non , et enfin si vous voulez qu'
 
 ... Configuration
 
-Cette section est une des plus importantes elle permet de choisir le modèle et l'ip de votre roku (dans le cas ou l'autodétection n'a pas fonctionnée)
+Cette section est une des plus importantes elle permet de choisir le modèle et l'IP de votre roku (dans le cas ou l'autodétection n'a pas fonctionné)
 
-Le bouton "Synchroniser les chaînes" permet une fois votre équipement SAUVEGARDE de lancer une récupération des chaines disponibles sur votre roku ainsi que leur image.
+Le bouton "Synchroniser les chaînes" permet une fois votre équipement sauvegardé de lancer une récupération des chaînes disponibles sur votre roku ainsi que leur image.
 Vous pouvez cliquer sur ce bouton chaque fois que vous avez ajouté ou supprimé des chaines de votre roku afin de synchroniser l'ensemble.
 
 ... Tableau de Commandes
@@ -53,9 +53,9 @@ image:../images/roku_screenshot4.png[width=380]
 Le widget se décompose en trois parties :
 
 * Une partie centrale qui est en fait la télécommande de votre Roku
-* Une partie Chaînes qui permet d'avoir les icones de toutes les chaînes (scrollable) et ainsi avoir un accés direct à vos chaînes
-* Une partie recherche permettant selon les pages ou vous êtes (quelques rares pages) d'avoir un accés direct à la recherche et même de taper votre recherche avec le clavier
+* Une partie Chaînes qui permet d'avoir les icones de toutes les chaînes (scrollable) et ainsi avoir un accès direct à vos chaînes
+* Une partie recherche permettant selon les pages sur lesquelles vous êtes (quelques rares pages) d'avoir un accès direct à la recherche et même de taper votre recherche avec le clavier
 
-Vous pouvez avec les 3 boutons en bas choisir la page à afficher. La page se chargeant à chaque fois au moment ou vous vous rendez sur le dashboard étant bien entendu celle de la télécommande.
+Vous pouvez avec les 3 boutons du bas choisir la page à afficher. La page se chargeant à chaque fois au moment où vous vous rendez sur le dashboard étant bien entendu celle de la télécommande.
 
 
