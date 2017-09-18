@@ -1,11 +1,11 @@
 {
-	"id" : "denonavr",
-	"name" : "Denon",
-	"description" : "Plugin permettant de piloter les amplificateurs Denon",
+	"id" : "roku",
+	"name" : "Roku",
+	"description" : "Plugin pour gérer vos rokus",
 	"licence" : "AGPL",
-	"author" : "Loïc",
+	"author" : "Ludovic SARAKHA",
 	"require" : "3.0",
 	"category" : "multimedia",
-	"changelog" : "https://github.com/jeedom/plugin-denonavr/blob/stable/doc/#language#/changelog.asciidoc",
-	"documentation" : "https://github.com/jeedom/plugin-denonavr/blob/stable/doc/#language#/index.asciidoc"
+	"changelog" : "https://github.com/jeedom/plugin-roku/blob/stable/doc/#language#/changelog.asciidoc",
+	"documentation" : "https://github.com/jeedom/plugin-roku/blob/stable/doc/#language#/index.asciidoc"
 }
